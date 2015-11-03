@@ -1,0 +1,39 @@
+{
+  "name": "devhelp/salesforce-rest-api-client",
+  "description": "",
+  "homepage": "http://devhelp.pl",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Michał Sikora",
+      "email": "michal@devhelp.pl"
+    },
+    {
+      "name": "devhelp.pl",
+      "email": "devhelp@devhelp.pl"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Devhelp\\Salesforce\\": "lib/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Devhelp\\Salesforce\\": "tests/"
+    }
+  },
+  "require": {
+    "php": ">=5.4",
+    "guzzlehttp/guzzle": "~6.0",
+    "symfony/options-resolver": "~2.7.6"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "5.*"
+  },
+  "suggest": {
+  },
+  "config": {
+    "bin-dir": "bin"
+  }
+}

@@ -1,0 +1,8 @@
+filter:
+    paths: [lib/*]
+    excluded_paths: [bin/*, spec/*, tests/*, build/*, vendor/*]
+tools:
+    php_analyzer: true
+checks:
+    php:
+        code_rating: true
