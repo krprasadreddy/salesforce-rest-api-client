@@ -37,6 +37,8 @@ class Login extends Method implements LoginMethodInterface
             'password'
         ]);
 
+        $this->optionResolver->resolve($options);
+
         $response = $this->salesforceClient->call(self::METHOD, self::URI, [
             'form_params' => [
                 'grant_type' => $options['grant_type'],
