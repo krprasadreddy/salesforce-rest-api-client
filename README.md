@@ -1,4 +1,4 @@
-#Salesforce Rest Client
+#Salesforce Rest API Client
 
 [![Code Climate](https://codeclimate.com/github/devhelp/salesforce-rest-api-client/badges/gpa.svg)](https://codeclimate.com/github/devhelp/salesforce-rest-api-client)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/devhelp/salesforce-rest-api-client/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/devhelp/salesforce-rest-api-client/?branch=master)
@@ -6,8 +6,20 @@
 [![Coverage Status](https://coveralls.io/repos/devhelp/salesforce-rest-api-client/badge.svg?branch=master&service=github)](https://coveralls.io/github/devhelp/salesforce-rest-api-client?branch=master)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 
-```php
 
+Salesforce Rest Api Client provides basic methods
+* Login 
+* Get record
+* Create record
+* Update record
+* Delete record
+* Retrieve metadata object
+* Handling basic errors
+
+
+###Login example
+
+```php
     use Devhelp\Salesforce\Client\SalesforceClientFactory;
     use Devhelp\Salesforce;
 
@@ -22,13 +34,19 @@
         'username' => 'user@example.com',
         'password' => 'passwordwithsecret'
     ]);
+    
+    $instanceUrl = $response['instance_url'];
+    $accessToken = $response['token_type'] . ' ' . $response['access_token'];
+```    
 
-    $salesforceClient = (new SalesforceClientFactory($response['instance_url']))->getClient();
+###Create record example
 
+```php
+    //$instanceUrl should be taken from Login method response 
+    $salesforceClient = (new SalesforceClientFactory($instanceUrl))->getClient();
     $method = new Method\CreateObject($salesforceClient);
-
-    $response = $method->run($response['token_type'] . ' ' . $response['access_token'], 'Account', [
+    //$accessToken should be taken from Login method response
+    $response = $method->run($accessToken, 'Account', [
         'Name' => 'New Account Name'
     ]);
-    
-```    
+```  
