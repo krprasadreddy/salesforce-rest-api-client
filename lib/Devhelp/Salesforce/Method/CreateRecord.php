@@ -2,15 +2,18 @@
 
 namespace Devhelp\Salesforce\Method;
 
+use Devhelp\Salesforce\Method\Base\Method;
+use Devhelp\Salesforce\Method\Base\ObjectMethodInterface;
+
 /**
  * @author <michal@devhelp.pl>
  */
-class CreateObject extends Method implements ObjectAuthorizedMethodInterface
+class CreateRecord extends Method implements ObjectMethodInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function run($authorization, $objectName, array $options)
+    public function call($objectName, $authorization, array $options)
     {
         $apiVersion = $this->salesforceClient->getApiVersion();
         $response = $this

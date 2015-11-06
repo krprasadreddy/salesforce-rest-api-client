@@ -3,22 +3,22 @@
 namespace Devhelp\Salesforce;
 
 use Devhelp\Salesforce\Client\SalesforceClientInterface;
-use Devhelp\Salesforce\Method\CreateObject;
+use Devhelp\Salesforce\Method\CreateRecord;
 use GuzzleHttp\Psr7\Response;
 use Prophecy\Argument;
 
 /**
  * @author <michal@devhelp.pl>
  */
-class CreateObjectTest extends \PHPUnit_Framework_TestCase
+class CreateRecordTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
      */
-    public function itShouldRunCreateObject()
+    public function itShouldCallCreateObject()
     {
-        $method = new CreateObject($this->getSalesforceClientMock());
-        $response = $method->run('1234', 'Account', [
+        $method = new CreateRecord($this->getSalesforceClientMock());
+        $response = $method->call('Account', '1234', [
             'Name' => 'AccountName'
         ]);
 

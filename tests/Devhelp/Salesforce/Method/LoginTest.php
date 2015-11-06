@@ -17,7 +17,7 @@ class LoginTest extends \PHPUnit_Framework_TestCase
     public function itShouldRunLoginMethod()
     {
         $method = new Login($this->getSalesforceClientMock());
-        $response = $method->run([
+        $response = $method->call([
             'grant_type' => 'password',
             'client_id' => '12345',
             'client_secret' => '12345',
@@ -40,7 +40,7 @@ class LoginTest extends \PHPUnit_Framework_TestCase
     {
         $salesforceClient = $this->prophesize('Devhelp\Salesforce\Client\SalesforceClientInterface');
         $salesforceClient
-            ->call(Login::METHOD, Login::URI, Argument::type('array'))
+            ->call('POST', '/services/oauth2/token', Argument::type('array'))
             ->willReturn(new Response(200, [],
                 '{"access_token":"1234","instance_url":"https:\/\/eu5.salesforce.com","id":"1","token_type":"Bearer",
                 "issued_at":"1446587266836","signature":"1234"}'));
