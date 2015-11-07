@@ -15,7 +15,7 @@ class Login extends Method implements LoginMethodInterface
      */
     public function call(array $options)
     {
-        parent::validate($options);
+        $this->validate($options);
         $response = $this->salesforceClient->call('POST', '/services/oauth2/token', [
             'form_params' => [
                 'grant_type' => $options['grant_type'],

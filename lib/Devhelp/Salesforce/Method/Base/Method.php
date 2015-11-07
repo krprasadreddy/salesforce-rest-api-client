@@ -15,6 +15,11 @@ abstract class Method
      */
     protected $salesforceClient;
 
+    /**
+     * @var OptionsResolver
+     */
+    protected $optionResolver;
+
     public function __construct(SalesforceClientInterface $salesforceClient)
     {
         $this->salesforceClient = $salesforceClient;
