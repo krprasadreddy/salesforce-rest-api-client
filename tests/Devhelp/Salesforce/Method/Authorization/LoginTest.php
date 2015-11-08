@@ -1,6 +1,6 @@
 <?php
 
-namespace Devhelp\Salesforce\Method;
+namespace Devhelp\Salesforce\Method\Authorization;
 
 use Devhelp\Salesforce\Client\SalesforceClientInterface;
 use GuzzleHttp\Psr7\Response;

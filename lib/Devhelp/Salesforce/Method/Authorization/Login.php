@@ -1,6 +1,6 @@
 <?php
 
-namespace Devhelp\Salesforce\Method;
+namespace Devhelp\Salesforce\Method\Authorization;
 
 use Devhelp\Salesforce\Method\Base\LoginMethodInterface;
 use Devhelp\Salesforce\Method\Base\Method;

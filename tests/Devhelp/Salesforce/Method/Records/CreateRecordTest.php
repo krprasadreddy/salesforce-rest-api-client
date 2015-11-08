@@ -1,9 +1,8 @@
 <?php
 
-namespace Devhelp\Salesforce;
+namespace Devhelp\Salesforce\Method\Records;
 
 use Devhelp\Salesforce\Client\SalesforceClientInterface;
-use Devhelp\Salesforce\Method\CreateRecord;
 use GuzzleHttp\Psr7\Response;
 use Prophecy\Argument;
 
@@ -17,7 +16,7 @@ class CreateRecordTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldCallCreateObject()
     {
-        $method = new CreateRecord($this->getSalesforceClientMock());
+        $method = new CreateARecord($this->getSalesforceClientMock());
         $response = $method->call('Account', '1234', [
             'Name' => 'AccountName'
         ]);

@@ -1,14 +1,11 @@
 <?php
 
-namespace Devhelp\Salesforce\Method;
+namespace Devhelp\Salesforce\Method\ObjectMetadata;
 
 use Devhelp\Salesforce\Method\Base\Method;
 use Devhelp\Salesforce\Method\Base\ObjectMethodInterface;
 
-/**
- * @author <michal@devhelp.pl>
- */
-class CreateRecord extends Method implements ObjectMethodInterface
+class RetrieveMetadataForAnObject extends Method implements ObjectMethodInterface
 {
     /**
      * {@inheritdoc}
@@ -18,11 +15,10 @@ class CreateRecord extends Method implements ObjectMethodInterface
         $apiVersion = $this->salesforceClient->getApiVersion();
         $response = $this
             ->salesforceClient
-            ->call('POST', sprintf('/services/data/v%s/sobjects/%s/', $apiVersion, $objectName), [
+            ->call('GET', sprintf('/services/data/v%s/sobjects/%s/', $apiVersion, $objectName), [
                 'headers' => [
                     'authorization' => $authorization
-                ],
-                'json' => $options
+                ]
             ]);
 
         return json_decode($response->getBody()->getContents(), true);

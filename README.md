@@ -25,7 +25,7 @@ Salesforce Rest Api Client provides basic methods
 
     $salesforceClient = (new SalesforceClientFactory())->getClient();
 
-    $method = new Method\Login($salesforceClient);
+    $method = new Method\Authorization\Login($salesforceClient);
 
     $response = $method->call([
         'grant_type' => 'password',
@@ -44,7 +44,7 @@ Salesforce Rest Api Client provides basic methods
 ```php
     //$instanceUrl should be taken from Login method response 
     $salesforceClient = (new SalesforceClientFactory($instanceUrl))->getClient();
-    $method = new Method\CreateRecord($salesforceClient);
+    $method = new Method\Records\CreateARecord($salesforceClient);
     //$accessToken should be taken from Login method response
     $response = $method->call('Account', $accessToken, [
         'Name' => 'New Account Name'
