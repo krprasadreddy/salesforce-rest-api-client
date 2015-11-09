@@ -15,12 +15,12 @@
   ],
   "autoload": {
     "psr-4": {
-      "Devhelp\\Salesforce\\": "lib/Devhelp/Salesforce"
+      "Devhelp\\Salesforce\\": "lib"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Devhelp\\Salesforce\\": "tests/Devhelp/Salesforce"
+      "Devhelp\\Salesforce\\": "tests"
     }
   },
   "require": {
