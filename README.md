@@ -1,7 +1,6 @@
 #Salesforce Rest API Client
 
 [![Code Climate](https://codeclimate.com/github/devhelp/salesforce-rest-api-client/badges/gpa.svg)](https://codeclimate.com/github/devhelp/salesforce-rest-api-client)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/devhelp/salesforce-rest-api-client/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/devhelp/salesforce-rest-api-client/?branch=master)
 [![Build Status](https://travis-ci.org/devhelp/salesforce-rest-api-client.svg)](https://travis-ci.org/devhelp/salesforce-rest-api-client)
 [![Coverage Status](https://coveralls.io/repos/devhelp/salesforce-rest-api-client/badge.svg?branch=master&service=github)](https://coveralls.io/github/devhelp/salesforce-rest-api-client?branch=master)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
