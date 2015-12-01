@@ -5,6 +5,9 @@ namespace Devhelp\Salesforce\Method\ObjectMetadata;
 use Devhelp\Salesforce\Method\Base\Method;
 use Devhelp\Salesforce\Method\Base\ObjectMethodInterface;
 
+/**
+ * @author <michal@devhelp.pl>
+ */
 class RetrieveMetadataForAnObject extends Method implements ObjectMethodInterface
 {
     /**
@@ -21,6 +24,6 @@ class RetrieveMetadataForAnObject extends Method implements ObjectMethodInterfac
                 ]
             ]);
 
-        return json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 }

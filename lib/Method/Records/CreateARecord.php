@@ -25,6 +25,6 @@ class CreateARecord extends Method implements ObjectMethodInterface
                 'json' => $options
             ]);
 
-        return json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 }

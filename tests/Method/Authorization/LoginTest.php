@@ -24,13 +24,15 @@ class LoginTest extends \PHPUnit_Framework_TestCase
             'username' => 'user@example.com',
             'password' => 'test1234'
         ]);
+        $responseData = json_decode($response->getBody()->getContents(), true);
 
-        $this->assertArrayHasKey('access_token', $response);
-        $this->assertArrayHasKey('instance_url', $response);
-        $this->assertArrayHasKey('id', $response);
-        $this->assertArrayHasKey('token_type', $response);
-        $this->assertArrayHasKey('issued_at', $response);
-        $this->assertArrayHasKey('signature', $response);
+        $this->assertInstanceOf('Psr\Http\Message\ResponseInterface', $response);
+        $this->assertArrayHasKey('access_token', $responseData);
+        $this->assertArrayHasKey('instance_url', $responseData);
+        $this->assertArrayHasKey('id', $responseData);
+        $this->assertArrayHasKey('token_type', $responseData);
+        $this->assertArrayHasKey('issued_at', $responseData);
+        $this->assertArrayHasKey('signature', $responseData);
     }
 
     /**

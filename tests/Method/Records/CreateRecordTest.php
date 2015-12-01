@@ -21,9 +21,12 @@ class CreateRecordTest extends \PHPUnit_Framework_TestCase
             'Name' => 'AccountName'
         ]);
 
-        $this->assertArrayHasKey('id', $response);
-        $this->assertArrayHasKey('success', $response);
-        $this->assertArrayHasKey('errors', $response);
+        $responseData = json_decode($response->getBody()->getContents(), true);
+
+        $this->assertInstanceOf('Psr\Http\Message\ResponseInterface', $response);
+        $this->assertArrayHasKey('id', $responseData);
+        $this->assertArrayHasKey('success', $responseData);
+        $this->assertArrayHasKey('errors', $responseData);
     }
 
     /**

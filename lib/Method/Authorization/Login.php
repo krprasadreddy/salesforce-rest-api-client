@@ -26,7 +26,7 @@ class Login extends Method implements LoginMethodInterface
             ]
         ]);
 
-        return json_decode($response->getBody()->getContents(), true);
+        return $response;
     }
 
     protected function getRequiredOptions()

@@ -18,6 +18,7 @@ class ExceptionFactory
     public function create(ClientException $baseException)
     {
         $content = json_decode($baseException->getResponse()->getBody()->getContents(), true);
+
         if (isset($content[0])) {
             $errorCode = $content[0]['errorCode'];
             $message = $content[0]['message'];
