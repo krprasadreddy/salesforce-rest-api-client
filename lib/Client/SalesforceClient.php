@@ -37,7 +37,7 @@ class SalesforceClient implements SalesforceClientInterface
         try {
             return $this->httpClient->request($method, $uri, $options);
         } catch (ClientException $baseException) {
-            $exceptionFactory->create($baseException);
+            throw $exceptionFactory->create($baseException);
         }
     }
 

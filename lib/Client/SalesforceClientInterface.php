@@ -2,6 +2,7 @@
 
 namespace Devhelp\Salesforce\Client;
 
+use Devhelp\Salesforce\Exception\SalesforceRestApiException;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -15,7 +16,7 @@ interface SalesforceClientInterface
      * @param string $method
      * @param string $uri
      * @param array $options
-     * @return ResponseInterface
+     * @return ResponseInterface|SalesforceRestApiException
      */
     public function call($method, $uri, array $options = []);
 

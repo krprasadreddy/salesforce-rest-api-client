@@ -25,20 +25,20 @@ class ExceptionFactory
 
             switch ($errorCode) {
                 case self::INVALID_FIELD:
-                    throw new InvalidFieldException($message, 400);
+                    return new InvalidFieldException($message, 400);
                 case self::JSON_PARSER_ERROR:
-                    throw new JsonParserErrorException($message, 400);
+                    return new JsonParserErrorException($message, 400);
                 case self::REQUIRED_FIELD_MISSING:
-                    throw new RequiredFieldMissingException($message, 400);
+                    return new RequiredFieldMissingException($message, 400);
                 case self::NOT_FOUND:
-                    throw new NotFoundException($message, 400);
+                    return new NotFoundException($message, 400);
                 case self::INVALID_SESSION_ID:
-                    throw new InvalidSessionIdException($message, 400);
+                    return new InvalidSessionIdException($message, 400);
                 default:
-                    throw new BadRequestException('Unpredictable exception', 400);
+                    return new BadRequestException('Unpredictable exception', 400);
             }
         }
 
-        throw new BadRequestException('Empty response from Salesforce Api', 400);
+        return new BadRequestException('Empty response from Salesforce Api', 400);
     }
 }
