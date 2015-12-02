@@ -19,12 +19,19 @@ class SalesforceClientFactory
      */
     private $apiVersion;
 
+    /**
+     * @param string $baseUrl
+     * @param string $apiVersion
+     */
     public function __construct($baseUrl = 'https://ap1.salesforce.com', $apiVersion = '35.0')
     {
         $this->baseUrl = $baseUrl;
         $this->apiVersion = $apiVersion;
     }
 
+    /**
+     * @return SalesforceClient
+     */
     public function getClient()
     {
         $client = new Client([

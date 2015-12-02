@@ -21,6 +21,10 @@ class SalesforceClient implements SalesforceClientInterface
      */
     private $apiVersion;
 
+    /**
+     * @param ClientInterface $httpClient
+     * @param string $apiVersion
+     */
     public function __construct(ClientInterface $httpClient, $apiVersion)
     {
         $this->httpClient = $httpClient;

@@ -29,6 +29,9 @@ class Login extends Method implements LoginMethodInterface
         return $response;
     }
 
+    /**
+     * @return array
+     */
     protected function getRequiredOptions()
     {
         return [

@@ -12,6 +12,7 @@ before_script:
 
 script:
   - ./bin/phpunit
+  - ./bin/phpcs --standard=phpcs.xml --extensions=php --report=checkstyle --report-file=build/logs/checkstyle.xml lib
 
 after_script:
   - ./bin/coveralls -v

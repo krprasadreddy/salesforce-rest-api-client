@@ -15,6 +15,10 @@ class ExceptionFactory
     const NOT_FOUND = 'NOT_FOUND';
     const INVALID_SESSION_ID = 'INVALID_SESSION_ID';
 
+    /**
+     * @param ClientException $baseException
+     * @return SalesforceRestApiException
+     */
     public function create(ClientException $baseException)
     {
         $content = json_decode($baseException->getResponse()->getBody()->getContents(), true);
