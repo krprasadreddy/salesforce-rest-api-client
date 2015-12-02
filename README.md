@@ -8,11 +8,6 @@
 
 Salesforce Rest Api Client provides basic methods
 * Login 
-* Get record
-* Create record
-* Update record
-* Delete record
-* Retrieve metadata object
 * Handling basic errors
 
 
@@ -37,15 +32,3 @@ Salesforce Rest Api Client provides basic methods
     $instanceUrl = $response['instance_url'];
     $accessToken = $response['token_type'] . ' ' . $response['access_token'];
 ```    
-
-###Create record example
-
-```php
-    //$instanceUrl should be taken from Login method response 
-    $salesforceClient = (new SalesforceClientFactory($instanceUrl))->getClient();
-    $method = new Method\Records\CreateARecord($salesforceClient);
-    //$accessToken should be taken from Login method response
-    $response = $method->call('Account', $accessToken, [
-        'Name' => 'New Account Name'
-    ]);
-```  
