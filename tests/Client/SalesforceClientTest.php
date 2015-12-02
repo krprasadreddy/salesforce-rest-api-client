@@ -3,8 +3,10 @@
 namespace Devhelp\Salesforce\Client;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 
 /**
@@ -13,23 +15,32 @@ use GuzzleHttp\Psr7\Response;
 class SalesforceClientTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var SalesforceClient
-     */
-    private $salesforceClient;
-
-    public function setUp()
-    {
-        $this->salesforceClient = new SalesforceClient($this->getHttpClientMock(), '35.0');
-    }
-
-    /**
      * @test
      */
     public function itShouldCallMethodToSalesforceRestApi()
     {
-        $response = $this->salesforceClient->call('POST', '/', []);
+        $response = new Response(200, []);
+        $salesforceClient = new SalesforceClient($this->getHttpClientMock($response), '35.0');
+        $response = $salesforceClient->call('POST', '/', []);
 
         $this->assertEquals($response->getStatusCode(), 200);
+    }
+
+    /**
+     * @test
+     * @expectedException \Devhelp\Salesforce\Exception\InvalidFieldException
+     */
+    public function itShouldThrowInvalidFiledExceptionWhileRequestingWrongResource()
+    {
+        $responseMock = new ClientException(
+            'test',
+            new Request('POST', '/'),
+            new Response(200, [], '[{"message":"","errorCode":"INVALID_FIELD"}]')
+        );
+        $salesforceClient = new SalesforceClient($this->getHttpClientMock($responseMock), '35.0');
+        $response = $salesforceClient->call('POST', '/1', []);
+
+        $this->assertEquals($response->getStatusCode(), 400);
     }
 
     /**
@@ -37,16 +48,18 @@ class SalesforceClientTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldRetrieveApiVersion()
     {
-        $this->assertEquals($this->salesforceClient->getApiVersion(), '35.0');
+        $response = new Response(200, []);
+        $salesforceClient = new SalesforceClient($this->getHttpClientMock($response), '35.0');
+
+        $this->assertEquals($salesforceClient->getApiVersion(), '35.0');
     }
 
-    private function getHttpClientMock()
+    private function getHttpClientMock($response)
     {
-        $mock = new MockHandler([
-            new Response(200, [])
-        ]);
+        $mock = new MockHandler([$response]);
         $handler = HandlerStack::create($mock);
+        $client = new Client(['handler' => $handler]);;
 
-        return new Client(['handler' => $handler]);
+        return $client;
     }
 }
