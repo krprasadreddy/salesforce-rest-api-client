@@ -32,11 +32,7 @@ class SalesforceClientTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldThrowInvalidFiledException()
     {
-        $responseMock = new ClientException(
-            'test',
-            new Request('POST', '/'),
-            new Response(200, [], '[{"message":"","errorCode":"INVALID_FIELD"}]')
-        );
+        $responseMock = $this->getHttpClientExceptionMock('[{"message":"","errorCode":"INVALID_FIELD"}]');
         $salesforceClient = new SalesforceClient($this->getHttpClientMock($responseMock), '35.0');
         $response = $salesforceClient->call('POST', '/1', []);
 
@@ -49,11 +45,7 @@ class SalesforceClientTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldThrowJsonParserErrorException()
     {
-        $responseMock = new ClientException(
-            'test',
-            new Request('POST', '/'),
-            new Response(200, [], '[{"message":"","errorCode":"JSON_PARSER_ERROR"}]')
-        );
+        $responseMock = $this->getHttpClientExceptionMock('[{"message":"","errorCode":"JSON_PARSER_ERROR"}]');
         $salesforceClient = new SalesforceClient($this->getHttpClientMock($responseMock), '35.0');
         $response = $salesforceClient->call('POST', '/1', []);
 
@@ -66,11 +58,7 @@ class SalesforceClientTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldThrowRequiredFieldMissingException()
     {
-        $responseMock = new ClientException(
-            'test',
-            new Request('POST', '/'),
-            new Response(200, [], '[{"message":"","errorCode":"REQUIRED_FIELD_MISSING"}]')
-        );
+        $responseMock = $this->getHttpClientExceptionMock('[{"message":"","errorCode":"REQUIRED_FIELD_MISSING"}]');
         $salesforceClient = new SalesforceClient($this->getHttpClientMock($responseMock), '35.0');
         $response = $salesforceClient->call('POST', '/1', []);
 
@@ -83,11 +71,7 @@ class SalesforceClientTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldThrowNotFoundException()
     {
-        $responseMock = new ClientException(
-            'test',
-            new Request('POST', '/'),
-            new Response(200, [], '[{"message":"","errorCode":"NOT_FOUND"}]')
-        );
+        $responseMock = $this->getHttpClientExceptionMock('[{"message":"","errorCode":"NOT_FOUND"}]');
         $salesforceClient = new SalesforceClient($this->getHttpClientMock($responseMock), '35.0');
         $response = $salesforceClient->call('POST', '/1', []);
 
@@ -100,11 +84,33 @@ class SalesforceClientTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldThrowInvalidSessionIdException()
     {
-        $responseMock = new ClientException(
-            'test',
-            new Request('POST', '/'),
-            new Response(200, [], '[{"message":"","errorCode":"INVALID_SESSION_ID"}]')
-        );
+        $responseMock = $this->getHttpClientExceptionMock('[{"message":"","errorCode":"INVALID_SESSION_ID"}]');
+        $salesforceClient = new SalesforceClient($this->getHttpClientMock($responseMock), '35.0');
+        $response = $salesforceClient->call('POST', '/1', []);
+
+        $this->assertEquals($response->getStatusCode(), 400);
+    }
+
+    /**
+     * @test
+     * @expectedException \Devhelp\Salesforce\Exception\BadRequestException
+     */
+    public function itShouldThrowBadRequestException()
+    {
+        $responseMock = $this->getHttpClientExceptionMock('[{"message":"","errorCode":"UKNOWN_ERROR"}]');
+        $salesforceClient = new SalesforceClient($this->getHttpClientMock($responseMock), '35.0');
+        $response = $salesforceClient->call('POST', '/1', []);
+
+        $this->assertEquals($response->getStatusCode(), 400);
+    }
+
+    /**
+     * @test
+     * @expectedException \Devhelp\Salesforce\Exception\BadRequestException
+     */
+    public function itShouldThrowBadRequestExceptionIfResponseIsEmpty()
+    {
+        $responseMock = $this->getHttpClientExceptionMock('');
         $salesforceClient = new SalesforceClient($this->getHttpClientMock($responseMock), '35.0');
         $response = $salesforceClient->call('POST', '/1', []);
 
@@ -129,5 +135,14 @@ class SalesforceClientTest extends \PHPUnit_Framework_TestCase
         $client = new Client(['handler' => $handler]);;
 
         return $client;
+    }
+
+    private function getHttpClientExceptionMock($content)
+    {
+        return new ClientException(
+            'test',
+            new Request('POST', '/'),
+            new Response(200, [], $content)
+        );
     }
 }
