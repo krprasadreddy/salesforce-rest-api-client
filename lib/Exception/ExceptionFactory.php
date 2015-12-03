@@ -14,6 +14,7 @@ class ExceptionFactory
     const REQUIRED_FIELD_MISSING = 'REQUIRED_FIELD_MISSING';
     const NOT_FOUND = 'NOT_FOUND';
     const INVALID_SESSION_ID = 'INVALID_SESSION_ID';
+    const INVALID_GRANT = 'invalid_grant';
 
     /**
      * @param ClientException $baseException
@@ -22,6 +23,16 @@ class ExceptionFactory
     public function create(ClientException $baseException)
     {
         $content = json_decode($baseException->getResponse()->getBody()->getContents(), true);
+
+
+        if (isset($content['error'])) {
+            $errorCode = $content['error'];
+            $message = $content['error_description'];
+            switch ($errorCode) {
+                case self::INVALID_GRANT:
+                    return new InvalidGrantException($message, 400);
+            }
+        }
 
         if (isset($content[0])) {
             $errorCode = $content[0]['errorCode'];
