@@ -2,24 +2,21 @@
 
 namespace Devhelp\Salesforce\Method\Authorization;
 
-use Devhelp\Salesforce\Client\SalesforceClientInterface;
 use Devhelp\Salesforce\Method\MethodTestCase;
-use GuzzleHttp\Psr7\Response;
 use Prophecy\Argument;
 
 /**
  * @author <michal@devhelp.pl>
  */
-class LoginTest extends MethodTestCase
+class UsernamePasswordOAuthAuthenticationTest extends MethodTestCase
 {
     /**
      * @test
      */
-    public function itShouldRunLoginMethod()
+    public function itShouldUsernamePasswordOAuthAuthenticationMethod()
     {
-        $method = new Login($this->getSalesforceClientMock('35.0'));
+        $method = new UsernamePasswordOAuthAuthentication($this->getSalesforceClientMock('35.0'));
         $response = $method->call([
-            'grant_type' => 'password',
             'client_id' => '12345',
             'client_secret' => '12345',
             'username' => 'user@example.com',
@@ -73,6 +70,6 @@ class LoginTest extends MethodTestCase
      */
     protected function getJsonResponsePath()
     {
-        return __DIR__ . '/../Fixtures/LoginResponse.json';
+        return __DIR__ . '/../Fixtures/UsernamePasswordOAuthAuthenticationTestResponse.json';
     }
 }

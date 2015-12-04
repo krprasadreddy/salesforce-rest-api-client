@@ -8,7 +8,7 @@ use Devhelp\Salesforce\Method\Base\Method;
 /**
  * @author <michal@devhelp.pl>
  */
-class Login extends Method implements LoginMethodInterface
+class UsernamePasswordOAuthAuthentication extends Method implements LoginMethodInterface
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,7 @@ class Login extends Method implements LoginMethodInterface
         $this->validate($options);
         $response = $this->salesforceClient->call('POST', '/services/oauth2/token', [
             'form_params' => [
-                'grant_type' => $options['grant_type'],
+                'grant_type' => 'password',
                 'client_id' => $options['client_id'],
                 'client_secret' => $options['client_secret'],
                 'username' => $options['username'],
@@ -35,7 +35,6 @@ class Login extends Method implements LoginMethodInterface
     protected function getRequiredOptions()
     {
         return [
-            'grant_type',
             'client_id',
             'client_secret',
             'username',

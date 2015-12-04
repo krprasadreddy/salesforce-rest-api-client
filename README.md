@@ -7,32 +7,23 @@
 
 Salesforce Rest Api Client allows you to use rest api client and run salesforce method (endpoints).
 This component is based on documentation available on link
-[![Salesforce Rest Api documentation]](https://resources.docs.salesforce.com/sfdc/pdf/api_rest.pdf)
+[Salesforce Rest Api documentation](https://resources.docs.salesforce.com/sfdc/pdf/api_rest.pdf)
 
 Salesforce Rest Api Client provides basic methods
-* Login
+* Authorization
+    ** Web Server OAuth Authentication Flow
+    ** Username-Password OAuth Authentication Flow
 * Run SOQL queries
 * Handling basic errors
 
+## License
+-------
 
-###Login example
+This bundle is released under the MIT license. See the complete license in the
+bundle:
 
-```php
-    use Devhelp\Salesforce\Client\SalesforceClientFactory;
-    use Devhelp\Salesforce;
+    LICENSE
 
-    $salesforceClient = (new SalesforceClientFactory())->getClient();
+## Credits
 
-    $method = new Method\Authorization\Login($salesforceClient);
-
-    $response = $method->call([
-        'grant_type' => 'password',
-        'client_id' => 'client_id',
-        'client_secret' => 'client_secret',
-        'username' => 'user@example.com',
-        'password' => 'passwordwithsecret'
-    ]);
-    
-    $instanceUrl = $response['instance_url'];
-    $accessToken = $response['token_type'] . ' ' . $response['access_token'];
-```    
+Brought to you by : Devhelp.pl (http://devhelp.pl)
