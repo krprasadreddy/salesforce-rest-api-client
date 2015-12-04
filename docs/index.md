@@ -8,8 +8,9 @@
         * [Username-Password OAuth Authentication] (#username-password-oauth-authentication)
     * [Searches and Queries] (#searches-and-queries)
         * [Execute a SOQL Query] (#execute-a-soql-query)
+    * [Handling errors] (#handling-errors)
 * [Testing] (#testing)
-    * [Using Test Case] (#using-test-case)
+    * [Using Method Test Case] (#using-test-case)
     
 ## Installation
 
@@ -53,7 +54,7 @@ use Devhelp\Salesforce\Client\SalesforceClientFactory;
 use Devhelp\Salesforce\Method;
 
 $salesforceClient = (new SalesforceClientFactory())->getClient();
-$method = new Method\Authentication\UsernamePasswordOAuthAuthentication($this->getSalesforceClientMock('35.0'));
+$method = new Method\Authentication\UsernamePasswordOAuthAuthentication($salesforceClient);
 $response = $method->call([
     'client_id' => '3MVG9Rd3qC6oMalP7QOImRZCzLssDMXW3wXinwkdU78P884FfubCsyxWY1bFBjjGsd1jL.P7vTMRCWwcXidZO',
     'client_secret' => '4324321344342343243',

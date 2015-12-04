@@ -4,6 +4,9 @@
 [![Build Status](https://travis-ci.org/devhelp/salesforce-rest-api-client.svg)](https://travis-ci.org/devhelp/salesforce-rest-api-client)
 [![Coverage Status](https://coveralls.io/repos/devhelp/salesforce-rest-api-client/badge.svg?branch=master&service=github)](https://coveralls.io/github/devhelp/salesforce-rest-api-client?branch=master)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
+[![Latest Stable Version](https://poser.pugx.org/devhelp/salesforce-rest-api-client/v/stable)](https://packagist.org/packages/devhelp/salesforce-rest-api-client) 
+[![Latest Unstable Version](https://poser.pugx.org/devhelp/salesforce-rest-api-client/v/unstable)](https://packagist.org/packages/devhelp/salesforce-rest-api-client) 
+[![Total Downloads](https://poser.pugx.org/devhelp/salesforce-rest-api-client/downloads)](https://packagist.org/packages/devhelp/salesforce-rest-api-client) 
 
 Salesforce Rest Api Client allows you to use Salesforce Rest API.
 This component is based on documentation available on link:
@@ -17,11 +20,12 @@ Salesforce Rest Api Client provides basic methods
     * Username-Password OAuth Authentication
 * Run SOQL queries
 * Handling basic errors
+* Supports [PSR-7] (http://www.php-fig.org/psr/psr-7/)
 
 
 ## Documentation
 
-Documentation is available on link 
+Documentation is available on link:
 
 [Documentation](docs/index.md)
 
