@@ -2,21 +2,20 @@
 
 namespace Devhelp\Salesforce\Method\SearchesAndQueries;
 
-use Devhelp\Salesforce\Client\SalesforceClientInterface;
-use GuzzleHttp\Psr7\Response;
+use Devhelp\Salesforce\Method\MethodTestCase;
 use Prophecy\Argument;
 
 /**
  * @author <michal@devhelp.pl>
  */
-class ExecuteASoqlQueryTest extends \PHPUnit_Framework_TestCase
+class ExecuteASoqlQueryTest extends MethodTestCase
 {
     /**
      * @test
      */
     public function itShouldCallExecuteASoqlQuery()
     {
-        $method = new ExecuteASoqlQuery($this->getSalesforceClientMock());
+        $method = new ExecuteASoqlQuery($this->getSalesforceClientMock('35.0'));
         $response = $method->call('1234', [
             'q' => 'SELECT+name+from+Account'
         ]);
@@ -30,19 +29,42 @@ class ExecuteASoqlQueryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return SalesforceClientInterface
+     * {@inheritdoc}
      */
-    private function getSalesforceClientMock()
+    protected function getOptions()
     {
-        $salesforceClient = $this->prophesize('Devhelp\Salesforce\Client\SalesforceClientInterface');
-        $salesforceClient->getApiVersion()->willReturn('35.0');
-        $salesforceClient
-            ->call('GET', '/services/data/v35.0/query/?q=SELECT+name+from+Account', Argument::type('array'))
-            ->willReturn(new Response(200, [],
-                '{"done":true,"totalSize":2,"records":[{"attributes":{"type":"Account","url":
-                "/services/data/v20.0/sobjects/Account/001D000000IRFmaIAH"},"Name":"Test 1"},{"attributes":{"type":
-                "Account","url":"/services/data/v20.0/sobjects/Account/001D000000IomazIAB"},"Name":"Test 2"}]}'));
+        return Argument::type('array');
+    }
 
-        return $salesforceClient->reveal();
+    /**
+     * {@inheritdoc}
+     */
+    protected function getMethod()
+    {
+        return 'GET';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getUri()
+    {
+        return '/services/data/v35.0/query/?q=SELECT+name+from+Account';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getResponseStatusCode()
+    {
+        return 200;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getJsonResponsePath()
+    {
+        return __DIR__. '/../Fixtures/ExecuteASoqlQueryResponse.json';
     }
 }

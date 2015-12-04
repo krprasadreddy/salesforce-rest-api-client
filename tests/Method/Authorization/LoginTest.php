@@ -3,20 +3,21 @@
 namespace Devhelp\Salesforce\Method\Authorization;
 
 use Devhelp\Salesforce\Client\SalesforceClientInterface;
+use Devhelp\Salesforce\Method\MethodTestCase;
 use GuzzleHttp\Psr7\Response;
 use Prophecy\Argument;
 
 /**
  * @author <michal@devhelp.pl>
  */
-class LoginTest extends \PHPUnit_Framework_TestCase
+class LoginTest extends MethodTestCase
 {
     /**
      * @test
      */
     public function itShouldRunLoginMethod()
     {
-        $method = new Login($this->getSalesforceClientMock());
+        $method = new Login($this->getSalesforceClientMock('35.0'));
         $response = $method->call([
             'grant_type' => 'password',
             'client_id' => '12345',
@@ -36,17 +37,42 @@ class LoginTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return SalesforceClientInterface
+     * {@inheritdoc}
      */
-    private function getSalesforceClientMock()
+    protected function getOptions()
     {
-        $salesforceClient = $this->prophesize('Devhelp\Salesforce\Client\SalesforceClientInterface');
-        $salesforceClient
-            ->call('POST', '/services/oauth2/token', Argument::type('array'))
-            ->willReturn(new Response(200, [],
-                '{"access_token":"1234","instance_url":"https:\/\/eu5.salesforce.com","id":"1","token_type":"Bearer",
-                "issued_at":"1446587266836","signature":"1234"}'));
+        return Argument::type('array');
+    }
 
-        return $salesforceClient->reveal();
+    /**
+     * {@inheritdoc}
+     */
+    protected function getMethod()
+    {
+        return 'POST';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getUri()
+    {
+        return '/services/oauth2/token';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getResponseStatusCode()
+    {
+        return 200;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getJsonResponsePath()
+    {
+        return __DIR__ . '/../Fixtures/LoginResponse.json';
     }
 }

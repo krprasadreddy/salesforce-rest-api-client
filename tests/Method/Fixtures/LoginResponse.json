@@ -1,0 +1,8 @@
+{
+  "access_token": "1234",
+  "instance_url": "https:\/\/eu5.salesforce.com",
+  "id": "1",
+  "token_type": "Bearer",
+  "issued_at": "1446587266836",
+  "signature": "1234"
+}
