@@ -1,6 +1,6 @@
 <?php
 
-namespace Devhelp\Salesforce\Method\Authorization;
+namespace Devhelp\Salesforce\Method\Authentication;
 
 use Devhelp\Salesforce\Method\MethodTestCase;
 use Prophecy\Argument;
@@ -13,14 +13,14 @@ class WebServerOAuthAuthenticationTest extends MethodTestCase
     /**
      * @test
      */
-    public function itShouldUsernamePasswordOAuthAuthenticationMethod()
+    public function itShouldRunWebServerOAuthAuthenticationMethod()
     {
-        $method = new WebServerOAuthAuthentication($this->getSalesforceClientMock('35.0'));
+        $method = new UsernamePasswordOAuthAuthentication($this->getSalesforceClientMock('35.0'));
         $response = $method->call([
             'client_id' => '12345',
             'client_secret' => '12345',
-            'code' => 'dsafsdafsafdsa',
-            'redirect_uri' => 'http://example.com'
+            'username' => 'salesforce@example.com',
+            'password' => 'secretwithtoken'
         ]);
         $responseData = json_decode($response->getBody()->getContents(), true);
 

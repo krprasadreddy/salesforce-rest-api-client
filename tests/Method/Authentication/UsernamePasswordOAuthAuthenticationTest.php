@@ -1,6 +1,6 @@
 <?php
 
-namespace Devhelp\Salesforce\Method\Authorization;
+namespace Devhelp\Salesforce\Method\Authentication;
 
 use Devhelp\Salesforce\Method\MethodTestCase;
 use Prophecy\Argument;
@@ -13,7 +13,7 @@ class UsernamePasswordOAuthAuthenticationTest extends MethodTestCase
     /**
      * @test
      */
-    public function itShouldUsernamePasswordOAuthAuthenticationMethod()
+    public function itShouldRunUsernamePasswordOAuthAuthenticationMethod()
     {
         $method = new UsernamePasswordOAuthAuthentication($this->getSalesforceClientMock('35.0'));
         $response = $method->call([

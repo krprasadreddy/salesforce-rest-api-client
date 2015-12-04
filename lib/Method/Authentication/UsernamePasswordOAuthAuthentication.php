@@ -1,6 +1,6 @@
 <?php
 
-namespace Devhelp\Salesforce\Method\Authorization;
+namespace Devhelp\Salesforce\Method\Authentication;
 
 use Devhelp\Salesforce\Method\Base\LoginMethodInterface;
 use Devhelp\Salesforce\Method\Base\Method;
@@ -8,7 +8,7 @@ use Devhelp\Salesforce\Method\Base\Method;
 /**
  * @author <michal@devhelp.pl>
  */
-class WebServerOAuthAuthentication extends Method implements LoginMethodInterface
+class UsernamePasswordOAuthAuthentication extends Method implements LoginMethodInterface
 {
     /**
      * {@inheritdoc}
@@ -18,11 +18,11 @@ class WebServerOAuthAuthentication extends Method implements LoginMethodInterfac
         $this->validate($options);
         $response = $this->salesforceClient->call('POST', '/services/oauth2/token', [
             'form_params' => [
-                'grant_type' => 'authorization_code',
+                'grant_type' => 'password',
                 'client_id' => $options['client_id'],
                 'client_secret' => $options['client_secret'],
-                'redirect_uri' => $options['redirect_uri'],
-                'code' => $options['code']
+                'username' => $options['username'],
+                'password' => $options['password']
             ]
         ]);
 
@@ -37,8 +37,8 @@ class WebServerOAuthAuthentication extends Method implements LoginMethodInterfac
         return [
             'client_id',
             'client_secret',
-            'redirect_uri',
-            'code'
+            'username',
+            'password'
         ];
     }
 }
