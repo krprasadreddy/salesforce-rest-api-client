@@ -15,12 +15,12 @@ class WebServerOAuthAuthenticationTest extends MethodTestCase
      */
     public function itShouldRunWebServerOAuthAuthenticationMethod()
     {
-        $method = new UsernamePasswordOAuthAuthentication($this->getSalesforceClientMock('35.0'));
+        $method = new WebServerOAuthAuthentication($this->getSalesforceClientMock('35.0'));
         $response = $method->call([
             'client_id' => '12345',
             'client_secret' => '12345',
-            'username' => 'salesforce@example.com',
-            'password' => 'secretwithtoken'
+            'code' => 'dsadsadsadsadsa',
+            'redirect_uri' => 'http://oauth.example.com'
         ]);
         $responseData = json_decode($response->getBody()->getContents(), true);
 
