@@ -1,0 +1,28 @@
+{
+  "plans": [
+    {
+      "cardinality": 17,
+      "fields": [],
+      "leadingOperationType": "TableScan",
+      "notes": [
+        {
+          "description": "Not considering filter for optimization because unindexed",
+          "fields": [
+            "IsDeleted"
+          ],
+          "tableEnumOrId": "Contact"
+        },
+        {
+          "description": "Not considering filter for optimization because unindexed",
+          "fields": [
+            "IsDeleted"
+          ],
+          "tableEnumOrId": "Contact"
+        }
+      ],
+      "relativeCost": 2.341666666666667,
+      "sobjectCardinality": 17,
+      "sobjectType": "Contact"
+    }
+  ]
+}

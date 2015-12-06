@@ -8,24 +8,22 @@ use Prophecy\Argument;
 /**
  * @author <michal@devhelp.pl>
  */
-class ExecuteASoqlQueryWithDeletedItemsTest extends MethodTestCase
+class GetFeedbackOnQueryPerformanceTest extends MethodTestCase
 {
     /**
      * @test
      */
-    public function itShouldCallExecuteASoqlQueryWithDeletedItems()
+    public function itShouldCallGetFeedbackOnQueryPerformance()
     {
-        $method = new ExecuteASoqlQueryWithDeletedItems($this->getSalesforceClientMock('35.0'));
+        $method = new GetFeedbackOnQueryPerformance($this->getSalesforceClientMock('35.0'));
         $response = $method->call('1234', [
-            'q' => 'SELECT+name+from+Account+WHERE+isDeleted+=+TRUE'
+            'explain' => 'SELECT+name+from+Account'
         ]);
 
         $responseData = json_decode($response->getBody()->getContents(), true);
 
         $this->assertInstanceOf('Psr\Http\Message\ResponseInterface', $response);
-        $this->assertArrayHasKey('done', $responseData);
-        $this->assertArrayHasKey('totalSize', $responseData);
-        $this->assertArrayHasKey('records', $responseData);
+        $this->assertArrayHasKey('plans', $responseData);
     }
 
     /**
@@ -49,7 +47,7 @@ class ExecuteASoqlQueryWithDeletedItemsTest extends MethodTestCase
      */
     protected function getUri()
     {
-        return '/services/data/v35.0/queryAll/?q=SELECT+name+from+Account+WHERE+isDeleted+=+TRUE';
+        return '/services/data/v35.0/query/?explain=SELECT+name+from+Account';
     }
 
     /**
@@ -65,6 +63,6 @@ class ExecuteASoqlQueryWithDeletedItemsTest extends MethodTestCase
      */
     protected function getJsonResponsePath()
     {
-        return __DIR__. '/../Fixtures/ExecuteASoqlQueryWithDeletedItemsResponse.json';
+        return __DIR__. '/../Fixtures/GetFeedbackOnQueryPerformanceResponse.json';
     }
 }
