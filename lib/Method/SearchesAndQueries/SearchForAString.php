@@ -13,7 +13,7 @@ class SearchForAString extends Method implements SearchMethodInterface
     /**
      * {@inheritdoc}
      */
-    public function call($authorization, array $options)
+    public function call($authorization, array $options = [])
     {
         $apiVersion = $this->salesforceClient->getApiVersion();
         $response = $this

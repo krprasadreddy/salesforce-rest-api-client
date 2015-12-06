@@ -8,7 +8,7 @@ use Devhelp\Salesforce\Method\Base\SearchMethodInterface;
 /**
  * @author <michal@devhelp.pl>
  */
-class ExecuteASoqlQueryWithDeletedItems extends Method implements SearchMethodInterface
+class GetTheDefaultSearchScopeAndOrder extends Method implements SearchMethodInterface
 {
     /**
      * {@inheritdoc}
@@ -18,22 +18,12 @@ class ExecuteASoqlQueryWithDeletedItems extends Method implements SearchMethodIn
         $apiVersion = $this->salesforceClient->getApiVersion();
         $response = $this
             ->salesforceClient
-            ->call('GET', sprintf('/services/data/v%s/queryAll/?q=%s', $apiVersion, $options['q']), [
+            ->call('GET', sprintf('/services/data/v%s/search/scopeOrder', $apiVersion), [
                 'headers' => [
                     'authorization' => $authorization
                 ]
             ]);
 
         return $response;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getRequiredOptions()
-    {
-        return [
-            'q'
-        ];
     }
 }

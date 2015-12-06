@@ -15,5 +15,5 @@ interface SearchMethodInterface extends MethodInterface
      * @param array $options
      * @return ResponseInterface|SalesforceRestApiException
      */
-    public function call($authorization, array $options);
+    public function call($authorization, array $options = []);
 }
