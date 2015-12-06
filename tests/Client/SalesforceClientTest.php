@@ -45,7 +45,7 @@ class SalesforceClientTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldThrowSalesforceExceptionWhenResponseHasMessageAndErrorCode()
     {
-        $responseMock = $this->getHttpClientExceptionMock('{"message":"test","errorCode":"test"}');
+        $responseMock = $this->getHttpClientExceptionMock('{"error_description":"test","error":"test"}');
         $salesforceClient = new SalesforceClient($this->getHttpClientMock($responseMock), '35.0');
         $response = $salesforceClient->call('POST', '/1', []);
 
