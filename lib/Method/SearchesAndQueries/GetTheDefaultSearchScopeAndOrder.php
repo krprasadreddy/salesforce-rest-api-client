@@ -15,6 +15,7 @@ class GetTheDefaultSearchScopeAndOrder extends Method implements SearchMethodInt
      */
     public function call($authorization, array $options = [])
     {
+        $this->validate($options);
         $apiVersion = $this->salesforceClient->getApiVersion();
         $response = $this
             ->salesforceClient

@@ -15,6 +15,7 @@ class ExecuteASoqlQueryWithDeletedItems extends Method implements SearchMethodIn
      */
     public function call($authorization, array $options = [])
     {
+        $this->validate($options);
         $apiVersion = $this->salesforceClient->getApiVersion();
         $response = $this
             ->salesforceClient

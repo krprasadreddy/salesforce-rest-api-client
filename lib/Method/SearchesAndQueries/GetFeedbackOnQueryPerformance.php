@@ -15,6 +15,7 @@ class GetFeedbackOnQueryPerformance extends Method implements SearchMethodInterf
      */
     public function call($authorization, array $options = [])
     {
+        $this->validate($options);
         $apiVersion = $this->salesforceClient->getApiVersion();
         $response = $this
             ->salesforceClient
