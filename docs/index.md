@@ -1,5 +1,4 @@
 # Salesforce Rest API Client
-------------
 
 * [Installation] (#installation)
 * [Usage] (#usage)
@@ -8,6 +7,10 @@
         * [Username-Password OAuth Authentication] (#username-password-oauth-authentication)
     * [Searches and Queries] (#searches-and-queries)
         * [Execute a SOQL Query] (#execute-a-soql-query)
+        * [Execute a SOQL Query that Includes Deleted Items] (#execute-a-soql-query-that-includes-deleted-items)
+        * [Get Feedback on Query Performance] (#get-feedback-on-query-performance)
+        * [Search for a String] (#search-for-a-string)
+        * [Get the Default Search Scope and Order] (#get-the-default-search-scope-and-order)
     * [Handling errors] (#handling-errors)
 * [Testing] (#testing)
     * [Using Method Test Case] (#using-test-case)
@@ -67,6 +70,9 @@ $response = $method->call([
 #### Execute a SOQL Query
 
 ```php
+use Devhelp\Salesforce\Client\SalesforceClientFactory;
+use Devhelp\Salesforce\Method;
+
 //$response from authentication method
 $responseData = json_decode($response->getBody()->getContents(), true); 
 
@@ -74,7 +80,98 @@ $salesforceClient = (new SalesforceClientFactory($responseData['instance_url']))
 
 $method = new Method\SearchesAndQueries\ExecuteASoqlQuery($salesforceClient);
 
-$response = $method->call($responseData['token_type']. ' '.$responseData['access_token'], [
+$response = $method->call($responseData['token_type']. ' ' .$responseData['access_token'], [
    'q' => 'SELECT+name+from+Account'
 ]);
+```
+
+#### Execute a SOQL Query that Includes Deleted Items
+
+```php
+use Devhelp\Salesforce\Client\SalesforceClientFactory;
+use Devhelp\Salesforce\Method;
+
+//$response from authentication method
+$responseData = json_decode($response->getBody()->getContents(), true);
+
+$salesforceClient = (new SalesforceClientFactory($responseData['instance_url']))->getClient();
+
+$method = new Method\SearchesAndQueries\ExecuteASoqlQueryWithDeletedItems($salesforceClient);
+
+$response = $method->call($responseData['token_type']. ' ' .$responseData['access_token'], [
+   'q' => 'SELECT+name+from+Account+WHERE+isDeleted+=+TRUE'
+]);
+```
+
+#### Execute a SOQL Query that Includes Deleted Items
+
+```php
+use Devhelp\Salesforce\Client\SalesforceClientFactory;
+use Devhelp\Salesforce\Method;
+
+//$response from authentication method
+$responseData = json_decode($response->getBody()->getContents(), true);
+
+$salesforceClient = (new SalesforceClientFactory($responseData['instance_url']))->getClient();
+
+$method = new Method\SearchesAndQueries\ExecuteASoqlQueryWithDeletedItems($salesforceClient);
+
+$response = $method->call($responseData['token_type']. ' ' .$responseData['access_token'], [
+   'q' => 'SELECT+name+from+Account+WHERE+isDeleted+=+TRUE'
+]);
+```
+
+#### Get Feedback on Query Performance
+
+```php
+use Devhelp\Salesforce\Client\SalesforceClientFactory;
+use Devhelp\Salesforce\Method;
+
+//$response from authentication method
+$responseData = json_decode($response->getBody()->getContents(), true);
+
+$salesforceClient = (new SalesforceClientFactory($responseData['instance_url']))->getClient();
+
+$method = new Method\SearchesAndQueries\GetFeedbackOnQueryPerformance($salesforceClient);
+
+$response = $method->call($responseData['token_type']. ' ' .$responseData['access_token'], [
+   'explain' => 'SELECT+name+from+Account'
+]);
+```
+
+#### Search for a String
+
+For this method we are using [SOSL] (https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_sosl_about.htm)
+language
+
+```php
+use Devhelp\Salesforce\Client\SalesforceClientFactory;
+use Devhelp\Salesforce\Method;
+
+//$response from authentication method
+$responseData = json_decode($response->getBody()->getContents(), true);
+
+$salesforceClient = (new SalesforceClientFactory($responseData['instance_url']))->getClient();
+
+$method = new Method\SearchesAndQueries\SearchForAString($salesforceClient);
+
+$response = $method->call($responseData['token_type']. ' ' .$responseData['access_token'], [
+   'q' => 'FIND {searching text}'
+]);
+```
+
+#### Get the Default Search Scope and Order
+
+```php
+use Devhelp\Salesforce\Client\SalesforceClientFactory;
+use Devhelp\Salesforce\Method;
+
+//$response from authentication method
+$responseData = json_decode($response->getBody()->getContents(), true);
+
+$salesforceClient = (new SalesforceClientFactory($responseData['instance_url']))->getClient();
+
+$method = new Method\SearchesAndQueries\GetTheDefaultSearchScopeAndOrder($salesforceClient);
+
+$response = $method->call($responseData['token_type']. ' ' .$responseData['access_token']);
 ```

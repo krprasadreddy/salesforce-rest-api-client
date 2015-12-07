@@ -9,17 +9,20 @@
 [![Total Downloads](https://poser.pugx.org/devhelp/salesforce-rest-api-client/downloads)](https://packagist.org/packages/devhelp/salesforce-rest-api-client) 
 
 Salesforce Rest Api Client allows you to use Salesforce Rest API.
-This component is based on documentation available on link:
+This component is based on documentation available [here](https://resources.docs.salesforce.com/sfdc/pdf/api_rest.pdf)
 
-[Salesforce Rest Api documentation](https://resources.docs.salesforce.com/sfdc/pdf/api_rest.pdf)
-
-Salesforce Rest Api Client provides basic methods
+THe main goals:
 
 * Authorization
     * Web Server OAuth Authentication
     * Username-Password OAuth Authentication
-* Run SOQL queries
-* Handling basic errors
+* Working with Searches and Queries
+    * Execute a SOQL Query
+    * Execute a SOQL Query that Includes Deleted Items
+    * Get Feedback on Query Performance
+    * Search for a String
+    * Get the Default Search Scope and Order
+* Handling API error
 * Supports [PSR-7] (http://www.php-fig.org/psr/psr-7/)
 
 
