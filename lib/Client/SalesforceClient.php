@@ -52,4 +52,12 @@ class SalesforceClient implements SalesforceClientInterface
     {
         return $this->apiVersion;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function replaceHttpClient(ClientInterface $httpClient)
+    {
+        $this->httpClient = $httpClient;
+    }
 }
